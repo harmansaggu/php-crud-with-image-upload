@@ -18,15 +18,15 @@
 		}elseif(empty($email)){
 			$errorMsg = 'Please input email';
 		}else{
-			//get image extension
+
 			$imgExt = strtolower(pathinfo($imgName, PATHINFO_EXTENSION));
-			//allow extenstion
+
 			$allowExt  = array('jpeg', 'jpg', 'png', 'gif');
-			//random new name for photo
+
 			$userPic = time().'_'.rand(1000,9999).'.'.$imgExt;
-			//check a valid image
+
 			if(in_array($imgExt, $allowExt)){
-				//check image size less than 5MB
+
 				if($imgSize < 5000000){
 					move_uploaded_file($imgTmp ,$upload_dir.$userPic);
 				}else{
@@ -37,7 +37,7 @@
 			}
 		}
 
-		//check upload file not error than insert data to database
+
 		if(!isset($errorMsg)){
 			$sql = "insert into contacts(name, contact, email, image)
 					values('".$name."', '".$contact."', '".$email."', '".$userPic."')";
