@@ -22,19 +22,17 @@
 		$imgTmp = $_FILES['image']['tmp_name'];
 		$imgSize = $_FILES['image']['size'];
 
-		//udate image if user select new image
 		if($imgName){
-			//get image extension
+
 			$imgExt = strtolower(pathinfo($imgName, PATHINFO_EXTENSION));
-			//allow extenstion
+
 			$allowExt  = array('jpeg', 'jpg', 'png', 'gif');
-			//random new name for photo
+
 			$userPic = time().'_'.rand(1000,9999).'.'.$imgExt;
-			//check a valid image
+
 			if(in_array($imgExt, $allowExt)){
-				//check image size less than 5MB
+
 				if($imgSize < 5000000){
-					//delete old image
 					unlink($upload_dir.$row['image']);
 					move_uploaded_file($imgTmp ,$upload_dir.$userPic);
 				}else{
@@ -44,11 +42,10 @@
 				$errorMsg = 'Please select a valid image';
 			}
 		}else{
-			//if not select new image - use old image name
+
 			$userPic = $row['image'];
 		}
 
-		//check upload file not error than insert data to database
 		if(!isset($errorMsg)){
 			$sql = "update contacts
 									set name = '".$name."',
@@ -100,6 +97,9 @@
         <div class="row justify-content-center">
           <div class="col-md-6">
             <div class="card">
+              <div class="card-header">
+                Edit Profile
+              </div>
               <div class="card-body">
                 <form class="" action="" method="post" enctype="multipart/form-data">
                     <div class="form-group">
